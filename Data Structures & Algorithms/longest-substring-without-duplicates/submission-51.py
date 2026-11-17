@@ -1,0 +1,11 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        seen = set()
+        left = best = 0
+        for right, ch in enumerate(s):
+            while ch in seen:          # shrink from the left until ch's old copy is gone
+                seen.remove(s[left])
+                left += 1
+            seen.add(ch)
+            best = max(best, right - left + 1)
+        return best
